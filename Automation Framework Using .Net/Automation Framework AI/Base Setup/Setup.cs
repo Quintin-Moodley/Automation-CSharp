@@ -14,18 +14,18 @@ namespace Automation_Framework_AI.Base_Setup
         public Eyes Eyes { get; private set; }
 
         [SetUp]
-        public void StartUp(string TestName)
+        public void StartUp(string TestName,string AppName)
         {
             // Initialize WebDriver and configure Applitools
             Driver = new ChromeDriver();
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             Eyes = new Eyes
             {
-                ApiKey = Environment.GetEnvironmentVariable("APIKEY",EnvironmentVariableTarget.User)
+                ApiKey = Environment.GetEnvironmentVariable(Resources.AppitoolsApiKey,EnvironmentVariableTarget.User)
             };
-            Eyes.Open(Driver,"","");
+            Eyes.Open(Driver,AppName,TestName);
 
-            Driver.Navigate().GoToUrl("URL//www.com");
+            Driver.Navigate().GoToUrl(Resources.URL);
 
         }
         [TearDown]
