@@ -4,6 +4,7 @@ using Applitools;
 using Applitools.Selenium;
 using NUnit.Framework;
 using System;
+using OpenQA.Selenium.DevTools.V119.Page;
 
 namespace Automation_Framework_AI.Base_Setup
 {
@@ -13,7 +14,7 @@ namespace Automation_Framework_AI.Base_Setup
         public Eyes Eyes { get; private set; }
 
         [SetUp]
-        public void StartUp()
+        public void StartUp(string TestName)
         {
             // Initialize WebDriver and configure Applitools
             Driver = new ChromeDriver();
@@ -22,6 +23,8 @@ namespace Automation_Framework_AI.Base_Setup
             {
                 ApiKey = Environment.GetEnvironmentVariable("APIKEY",EnvironmentVariableTarget.User)
             };
+            Eyes.Open(Driver,"","");
+
             Driver.Navigate().GoToUrl("URL//www.com");
 
         }
